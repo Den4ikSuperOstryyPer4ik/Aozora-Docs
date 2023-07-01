@@ -64,9 +64,9 @@
 # Developers
 <table>
 <tr>
-<td align="center"><a href="https://t.me/hikamorumeh"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Amore</b></sub></a><br /><a href="https://t.me/hikamorumeh" title="Telegram">🧑‍💻</a></td>
-<td align="center"><a href="https://t.me/Den4ikSOP"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Den4ik</b></sub></a><br /><a href="https://t.me/Den4ikSOP" title="Telegram">🧑‍💻</a></td>
-<td align="center"><a href="https://t.me/toxicuse"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Toxic</b></sub></a><br /><a href="https://t.me/toxicuse" title="Telegram">🧑‍💻</a></td>
+<td align="center"><a href="https://t.me/hikamorumeh"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Amore</b></sub></a><br /><a href="https://t.me/hikamorumeh" title="Telegram">💬</a></td>
+<td align="center"><a href="https://t.me/Den4ikSOP"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Den4ik</b></sub></a><br /><a href="https://t.me/Den4ikSOP" title="Telegram">💬</a></td>
+<td align="center"><a href="https://t.me/toxicuse"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Toxic</b></sub></a><br /><a href="https://t.me/toxicuse" title="Telegram">💬</a></td>
 </tr>
 </table>
 
