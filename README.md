@@ -83,8 +83,8 @@
   </tr>
   <tr>
     <td>
-      <a href="https://te.legra.ph/file/972a8606bc75be1ddf74f.mp4">
-        <img src="https://te.legra.ph/file/972a8606bc75be1ddf74f.mp4" alt="Гифка">
+      <a href="https://t.me/aozoram_bot">
+        <img src="https://x0.at/E0q_.gif" alt="Гифка">
       </a>
     </td>
   </tr>
