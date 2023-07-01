@@ -7,8 +7,19 @@
 
 
 <p align="center">
+  <a href="https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/blob/main/module.md">
+    <img src="https://img.icons8.com/bubbles/512/info.png" width="150" height="150" alt="Иконка какая-та">
+</p>
+<h2 align="center" style="">Документация по модулям, пар04ка примерчиков</h2>
+</a>
+
+<br>
+<hr>
+<br>
+
+<p align="center">
   <a href="https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/blob/main/db.md">
-    <img src="https://cdn-icons-png.flaticon.com/512/8476/8476108.png" width="80" height="80" alt="Логотип">
+    <img src="https://cdn-icons-png.flaticon.com/512/8476/8476108.png" width="100" height="100" alt="Логотип">
 </p>
 <h2 align="center" style="">Документация по созданию и использованию Базы Данных</h2>
 </a>
@@ -42,7 +53,7 @@
     <a href="https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/blob/main/answer.md">
         <img src="https://cdn-icons-png.flaticon.com/512/2598/2598935.png" width="80" height="80" alt="Логотип">
 </p>
-<h2 align="center">Документация по методам: answer, answer_media, answer_photo</h2>
+<h2 align="center">Документация по методам: answer</h2>
 </a>
 
 <br>
@@ -62,9 +73,30 @@
 
 
 # Developers
+<table>
+<tr>
+<td align="center"><a href="https://t.me/hikamorumeh"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Amore</b></sub></a><br /><a href="https://t.me/hikamorumeh" title="Telegram">💬</a></td>
+<td align="center"><a href="https://t.me/Den4ikSOP"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Den4ik</b></sub></a><br /><a href="https://t.me/Den4ikSOP" title="Telegram">💬</a></td>
+<td align="center"><a href="https://t.me/toxicuse"><img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" width="100px;" alt=""/><br /><sub><b>Toxic</b></sub></a><br /><a href="https://t.me/toxicuse" title="Telegram">💬</a></td>
+</tr>
+</table>
 
-- [AmoreForever](https://me.farkhodov.ml)
-- [Den4ikSuperOstryyPer4ik](https://www.github.com/Den4ikSuperOstryyPer4ik)
-- [Toxic](https://github.com/ToXic2290)
+<br>
+<hr>
+<br>
 
-![command help](https://te.legra.ph/file/972a8606bc75be1ddf74f.mp4)
+# Commands
+<table>
+  <tr>
+    <td>
+      Команда /help
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://t.me/aozoram_bot">
+        <img src="https://x0.at/E0q_.gif" alt="Гифка">
+      </a>
+    </td>
+  </tr>
+</table>
