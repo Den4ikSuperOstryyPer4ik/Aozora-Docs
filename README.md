@@ -67,5 +67,4 @@
 - [Den4ikSuperOstryyPer4ik](https://www.github.com/Den4ikSuperOstryyPer4ik)
 - [Toxic](https://github.com/ToXic2290)
 
-![Команда /help](help.gif)
-
+<img src="https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/raw/main/help.gif">
