@@ -67,4 +67,4 @@
 - [Den4ikSuperOstryyPer4ik](https://www.github.com/Den4ikSuperOstryyPer4ik)
 - [Toxic](https://github.com/ToXic2290)
 
-<img src="https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/raw/main/help.gif">
+![command help](https://te.legra.ph/file/972a8606bc75be1ddf74f.mp4)
