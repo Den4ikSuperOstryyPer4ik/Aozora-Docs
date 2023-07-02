@@ -39,7 +39,6 @@ await callback_query.edit(
 # хендлер для кнопки, только для админов чата (и владельца)
 from ...custom_decorators import validator
 
-@validator.callback_query(only_admins=True)
 async def user(
     bot: pyrogram.client.Client,
     call: pyrogram.types.CallbackQuery,
