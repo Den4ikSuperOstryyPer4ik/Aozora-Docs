@@ -2,7 +2,7 @@
     <img src="https://te.legra.ph/file/42f3f93f3a0492c1fdccf.png" alt="Aozora">
 </a>
 
-# Inline Docs:
+# Inline Docs v2.0:
 
 ## Декоратор @inline_query():
 ```python
@@ -83,7 +83,14 @@ from pyrogram.client import Client
 from pyrogram import types
 
 from ...custom_decorators import inline_query
+import asyncio
 
+async def chosen_inline_result_callback(
+    bot: Client,
+    result: types.ChosenInlineResult,
+):
+    await asyncio.sleep(3)
+    await result.answer("Прошло 3 секунды после отправки смс!\nСработал chosen_inline_result_callback!")
 
 @inline_query(
     command="test2",
@@ -98,25 +105,33 @@ async def inline_test2(bot: Client, query: types.InlineQuery):
     В общем на команду test2, но только у овнеров
     """
     return await query.answer([
-        types.InlineQueryResultArticle(
-            title="типа тест2 команда для овнеров",
-            input_message_content=types.InputTextMessageContent(
-                f"братан, ну типо ты ввел:\n@{bot.me.username} test2 {query.args_raw}\nэта инлайн",
+        query.result(
+            types.InlineQueryResultArticle(
+                title="типа тест2 команда для овнеров",
+                input_message_content=types.InputTextMessageContent(
+                    f"братан, ну типо ты ввел:\n@{bot.me.username} test2 {query.args_raw}\nэта инлайн",
+                ),
+                description="молодой чебурек(овнер), ты ввел команду test2!",
+                thumb_url="https://img.icons8.com/color/64/party-baloon.png",
+                thumb_height=64,
+                thumb_width=64,
             ),
-            description="молодой чебурек(овнер), ты ввел команду test2!",
-            thumb_url="https://img.icons8.com/color/64/party-baloon.png",
-            thumb_height=64,
-            thumb_width=64,
-        )
+            callback=chosen_inline_result_callback,
+        ),
     ], is_personal=True)
 ```
 > команда test2, работающая только у овнеров
+>
+> upd: был добавлен колбек
 ---
 ```python
 from pyrogram.client import Client
 from pyrogram import types, enums
 
 from ...custom_decorators import inline_query
+
+async def chosen_inline_result_callback(bot: Client, result: types.ChosenInlineResult, args: str):
+    return await result.answer(f"Ваши аргументы: {args}\nА здесь мог бы быть ваш текст в колбеке!))")
 
 
 @inline_query(
@@ -134,25 +149,48 @@ async def inline_test3(bot: Client, query: types.InlineQuery):
         и только в приватных чатах (ЛС)
     """
     return await query.answer([
-        types.InlineQueryResultArticle(
-            title="типа тест6 команда для allowed'ов и для лс",
-            input_message_content=types.InputTextMessageContent(
-                f"братан, ну типо ты ввел:\n@{bot.me.username} test3 {query.args_raw}\nэта инлайн с фильтром для allowed-юзеров и для ЛС!",
+        query.result(
+            types.InlineQueryResultArticle(
+                title="типа тест6 команда для allowed'ов и для лс",
+                input_message_content=types.InputTextMessageContent(
+                    f"эта инлайн с фильтром для allowed-юзеров и для ЛС!",
+                ),
+                description="молодой чебурек(алловед), ты ввел команду test3!",
+                thumb_url="https://img.icons8.com/color/64/party-baloon.png",
+                thumb_height=64,
+                thumb_width=64,
             ),
-            description="молодой чебурек(алловед), ты ввел команду test3!",
-            thumb_url="https://img.icons8.com/color/64/party-baloon.png",
-            thumb_height=64,
-            thumb_width=64,
-        )
+            chosen_inline_result_callback,
+            query.args_raw,
+        ),
     ], is_personal=True)
 ```
 > команда test3, работающая только у allowed-ов
+>
+> upd: был добавлен колбек
 ---
 ```python
 from pyrogram.client import Client
 from pyrogram import types
 
 from ...custom_decorators import inline_query
+import asyncio
+
+async def chosen_inline_result_callback(bot, result):
+    await asyncio.sleep(10)
+    await result.answer_media(
+        types.InputMediaVideo(
+            "https://x0.at/v5PU.mp4",
+            caption="урааа, роблааакс",
+        ),
+    )
+    await asyncio.sleep(10)
+    await result.answer_media(
+        types.InputMediaPhoto(
+            "https://images.wallpaperscraft.ru/image/single/noch_voda_maiak_74439_1920x1080.jpg",
+            caption="урааа, роблакс x2!"
+        )
+    )
 
 
 @inline_query(
@@ -168,19 +206,21 @@ async def inline_test4(bot: Client, query: types.InlineQuery):
     И сработает этот инлайн у всех
     """
     return await query.answer([
-        types.InlineQueryResultArticle(
-            title="типа \"test4 ура\" команда для всех",
-            input_message_content=types.InputTextMessageContent(
-                f"ура, роблакс, ну типо ты ввел:\n@{bot.me.username} test4 ура\nэта инлайн для всех!",
+        query.result(
+            types.InlineQueryResultVideo(
+                "https://x0.at/lzNz.mp4",
+                "https://img.icons8.com/dusk/64/video.png",
+                "Inline Video Result with callback",
+                description="Видосик с колбеком",
+                caption="10 сек..."
             ),
-            description="УРААА РООООБЛААКС",
-            thumb_url="https://img.icons8.com/color/64/party-baloon.png",
-            thumb_height=64,
-            thumb_width=64,
+            chosen_inline_result_callback,
         )
     ], is_personal=True)
 ```
 > команда test4, работающая только на "@username_bot test4 ура", и работает у всех пользователей в ТГ
+>
+> upd: добавлен колбек, ждущий 10 сек, меняющий видео, а потом снова ждущий 10 сек и уже меняет видос на фотку
 ---
 ```python
 from pyrogram.client import Client
@@ -188,6 +228,15 @@ from pyrogram import types
 
 from ...custom_decorators import inline_query
 
+async def chosen_inline_result_callback(bot, result):
+    ... # ваш код, получаемый какую-либо информацию
+
+    await result.answer_media(
+        types.InputMediaPhoto(
+            "https://images.wallpaperscraft.ru/image/single/noch_pereezd_znaki_84670_1920x1080.jpg",
+            caption="Какая-та информация была получена!",
+        )
+    )
 
 @inline_query(
     query_startswith="StartTest5",
@@ -208,21 +257,23 @@ async def inline_test5(bot: Client, query: types.InlineQuery):
     В общем на команду StartTest5, и только у пользователей с определенными юзернеймами
     """
     return await query.answer([
-        types.InlineQueryResultArticle(
-            title="оо, да ты особенный!",
-            input_message_content=types.InputTextMessageContent(
-                f"Так, смотри, ты умный, не полуфабрикат, ты ввел правильно \"StartTest5\"!\nКрасава, уважаю!",
+        query.result(
+            types.InlineQueryResultPhoto(
+                "https://images.wallpaperscraft.ru/image/single/nadpis_ozhidanie_podsvetka_134404_1280x720.jpg",
+                "https://img.icons8.com/office/80/hourglass-sand-bottom.png",
+                photo_width=1280,
+                photo_height=720,
+                caption="Пожалуйста, ожидайте...",
             ),
-            description="ура, ты умный!",
-            thumb_url="https://img.icons8.com/color/64/party-baloon.png",
-            thumb_height=64,
-            thumb_width=64,
-        )
+            chosen_inline_result_callback
+        ),
     ], is_personal=True)
 ```
 > команда test5, работающая только на StartTest5, ни starttest5, ни Starttest5, только на StartTest5!
 > 
 > и только у определенных пользователей с одним из usernames, которые указаны в декораторе!
+>
+> upd: добавлен колбек
 ---
 ```python
 from pyrogram.client import Client
@@ -360,9 +411,41 @@ async def handler_cmd(bot: Client, query: types.InlineQuery):
     match = query.match # даст что-то, только если в декораторе вы указали аргумент re_match в декораторе
 ```
 > вроде все
+---
+---
+```python
+"""
+Кстати, я сделал так, чтобы в любом types.InlineQueryResultXXXX можно было указать reply_markup такого вида:
+"""
+reply_markup = [
+    [
+        {
+            "text": "button",
+            "callback": your_callback,
+        },
+        {
+            "text": "look text",
+            "action": "answer",
+            "message": "text",
+            "show_alert": True,
+        }
+    ],
+    [
+        {
+            "text": "new button",
+            "switch_inline_query": "ура, роблакс",
+        },
+        {
+            "text": "new button 2",
+            "switch_inline_query_current_chat": "ура, роблакс",
+        },
+    ]
+]
 
-# Вроде как многое смог объяснить, дальше сами, или ждите доки по ChosenInlineResult!!
->## P.S. мне дико лень чет делать, поэтому хз когда эти доки по результу выйдут, но если хорошо попросите, то мб мб...
+"""
+А еще, колбеки очень достойная тема, облегчает многое.
+"""
+```
 ---
 <p align="center">
     <a href='https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/blob/main/README.md'>

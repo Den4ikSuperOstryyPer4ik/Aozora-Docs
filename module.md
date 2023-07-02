@@ -93,6 +93,132 @@ async def get_all_users_tokens(bot: Client, message: types.Message):
 ```
 > tokens_example.py
 ---
+# Inline SpotifyNow Module
+```python
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+from pyrogram import types
+
+from ...custom_decorators import inline_query, command
+from ...utils import get_args
+
+def get_auth_manager():
+    return SpotifyOAuth(
+        client_id="dc60d69ab3294f138668d4018bbc4021",
+        client_secret="03292c8175c746b28348c668b215e717",
+        redirect_uri="http://spotitoken.farkhodovme.tk/",
+        scope=(
+            "user-read-playback-state playlist-read-private playlist-read-collaborative"
+            "app-remote-control user-modify-playback-state user-library-modify"
+            "user-library-read"
+        )
+    )
+
+
+@command("setSpotifyToken")
+async def set_spotify_token(bot, message: types.Message):
+    token = get_args(message)
+    if not token:
+        return await message.answer("Пожалуйста введите <b>Spotify-TOKEN</b>.")
+
+    devDB = bot.db.<DEV>
+    if not hasattr(devDB, "Spotify"):
+        devDB.new_db("Spotify")
+
+    db = devDB.Spotify
+    db.set(str(message.from_user.id), token.strip())
+    return await message.answer(
+        "✅ Ваш <b>Spotify-TOKEN</b> был <b>успешно сохранен</b>!",
+        [
+            [
+                {
+                    "text": "Inline-Spotify",
+                    "switch_inline_query_current_chat": "spotify",
+                }
+            ]
+        ]
+    )
+
+
+async def get_spotify_now_track(bot, result):
+    user_id = result.from_user.id
+    db = bot.db.<DEV>.Spotify
+
+    sp = spotipy.Spotify(auth=db.get(f"{user_id}"), auth_manager=get_auth_manager())
+    current_track = sp.current_user_playing_track()
+
+    if current_track is None:
+        return await result.answer_media(
+            types.InputMediaPhoto(
+                "https://cdn-icons-png.flaticon.com/512/16/16187.png",
+                caption="😵‍💫 | <b>На данный момент не поет ничего.</b>",
+            ),
+            reply_markup=[
+                [
+                    {
+                        "text": "Inline-Spotify-Now",
+                        "switch_inline_query_current_chat": "spotify",
+                    }
+                ]
+            ]
+        )
+
+    track_name = current_track["item"]["name"]
+    artists = ", ".join([artist["name"] for artist in current_track["item"]["artists"]])
+    album = current_track["item"]["album"]["name"]
+    release_date = current_track["item"]["album"]["release_date"]
+    image_url = current_track["item"]["album"]["images"][0]["url"]
+
+    return await result.answer_media(
+        types.InputMediaPhoto(
+            image_url,
+            (
+                f"<b>{track_name} Now playing\n\n"
+                f"Artists: {artists}\n"
+                f"Album: {album}\n"
+                f"Release date: {release_date}</b>"
+            )
+        )
+    )
+
+
+
+@inline_query(
+    command="spotify",
+)
+async def inline_spotify(bot, query: types.InlineQuery):
+    devDB = bot.db.<DEV>
+    if not hasattr(devDB, "Spotify"):
+        devDB.new_db("Spotify")
+    db = devDB.Spotify
+    if not db.get(str(query.from_user.id)):
+        return await query.answer([
+            types.InlineQueryResultArticle(
+                title="🚫 Отсутствует Spotify-TOKEN",
+                input_message_content=types.InputTextMessageContent(
+                    "🚫 У вас <b>отсутствует Spotify-TOKEN</b>!\nℹ️ Чтобы его сохранить, напишите <a href=\"https://t.me/aozoram_bot/\">боту в лс</a> команду: <code>/setSpotifyToken TOKEN</code>",
+                ),
+                description="ℹ️ Вы не сохранили TOKEN :(",
+                thumb_url="https://img.icons8.com/stickers/100/null/behavior-blocker.png", thumb_height=100, thumb_width=100
+            )
+        ], 10, is_personal=True)
+
+    return await query.answer(
+        [
+            query.result(
+                types.InlineQueryResultPhoto(
+                    "https://images.wallpaperscraft.ru/image/single/nadpis_ozhidanie_podsvetka_134404_1280x720.jpg",
+                    "https://img.icons8.com/office/80/hourglass-sand-bottom.png",
+                    photo_width=1280,
+                    photo_height=720,
+                    caption="<b>Загружаю информацию о текущем проигрывающемся треке...</b>",
+                ),
+                get_spotify_now_track,
+            )
+        ], 10, is_personal=True,
+    )
+```
+> spotifyNowInline.py
 <p align="center">
     <a href='https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/blob/main/README.md'>
     <img width="64" height="64" src="https://img.icons8.com/flat-round/64/home--v1.png" alt="home--v1"/>

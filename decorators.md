@@ -5,6 +5,25 @@
 # Примеры декораторов для Aozora:
 
 
+## Декоратор stats
+``` python
+from ...custom_decorators import validator
+
+@validator.stats(str(dev_user_id)) # декоратор будет собирать статистику модуля 
+
+#ps. вставится под декором command вставьте на команду на которую юзер обязан использовать
+```
+> Пример использования декоратора stats
+``` python
+from ...custom_decorators import validator
+
+@validator.command("start")
+@validator.stats('742333517')
+async def start_command(bot: Client, message: Message):
+    ...
+```
+
+
 ##  Декоратор watcher
 > Аргументы:
 > - ***words_in_text***: list - *список слов которые должны быть в сообщении*
