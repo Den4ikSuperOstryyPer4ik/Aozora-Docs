@@ -78,7 +78,6 @@ from ...custom_decorators import validator
 > - ***only_allowed***: bool - *команду могут использовать только разрешенные пользователи*
 > - ***only_pm***: bool - *команда будет работать только в личных сообщениях с ботом*
 > - ***only_group***: bool - *команда будет работать только в группе*
-> - ***only_group_admins***: bool - *команда будет работать только администраторам и владельцу группы*
 > - ***only_premium***: bool - *команда будет работать только у Premium-юзеров TG*
 > - ***require_args***: bool - *декоратор проверит указаны ли аргументы после команды*
 > - ***require_reply***: bool - *декоратор проверит есть ли реплей*
@@ -92,8 +91,6 @@ from ...custom_decorators import validator
 @validator.command("hello", only_pm=True) # команда будет работать только в личных сообщениях с ботом
 
 @validator.command("hello", only_group=True) # команда будет работать только в группе
-
-@validator.command("hello", only_group_admins=True) # команда будет работать только администраторам и владельцу группы
 
 @validator.command("hello", only_premium=True) # команда будет работать только у Premium-юзеров TG
 
@@ -109,7 +106,6 @@ from ...custom_decorators import validator
 > Аргументы:
 > - ***only_allowed***: bool - инлайн кнопка будет работать только у разершенных пользователей
 > - ***only_premium***: bool - инлайн кнопка будет работать только у премиум пользователей телеграм
-> - ***only_group_admins***: bool - инлайн кнопка будет работать только у администраторов и владельца группы
 ---
 ``` python
 from ...custom_decorators import validator
@@ -117,8 +113,6 @@ from ...custom_decorators import validator
 @validator.callback_query(only_allowed=True) # инлайн кнопка будет работать только у разершенных пользователей 
 
 @validator.callback_query(only_premium=True) # инлайн кнопка будет работать только у премиум пользователей телеграм
-
-@validator.callback_query(only_group_admins=True) # инлайн кнопка будет работать только у администраторов и владельца группы
 ```
 ---
 <p align="center">
