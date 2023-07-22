@@ -13,6 +13,7 @@ from ...utils.msg import get_args
 
 @validator.command("test")
 async def test_command(bot: Client, message: Message):
+    """Docstring for command"""
     args = get_args(message)
     if not args:
         return await message.answer("Команда введа без аргументов")
@@ -21,6 +22,7 @@ async def test_command(bot: Client, message: Message):
 
 @validator.command("premium", require_premium=True)
 async def command_for_premium_users(bot: Client, message: Message):
+    """Docstring for command"""
     return await message.answer("Спасибо, Premium-пользователь, что воспользовался командой!")
 ```
 >  quickstart.py
@@ -37,6 +39,7 @@ import io, requests
 
 @validator.command("web2file", require_arg=True)
 async def web2file(bot: Client, message: types.Message):
+    """Docstring for command"""
     link = get_args(message)
     try:
         file = io.BytesIO(requests.get(link).content)
@@ -59,6 +62,7 @@ from ...utils.msg import get_args
 
 @validator.command("set_token", require_arg=True)
 async def set_user_token(bot: Client, message: types.Message):
+    """Docstring for command"""
     token = get_args(message)
     if not hasattr(bot.db.<DEV>, "TOKENS"):
         bot.db.<DEV>.new_db("TOKENS")
@@ -72,6 +76,7 @@ async def set_user_token(bot: Client, message: types.Message):
 
 @validator.command("get_token")
 async def get_user_token(bot: Client, message: types.Message):
+    """Docstring for command"""
     if not hasattr(bot.db.<DEV>, "TOKENS"):
         bot.db.<DEV>.new_db("TOKENS")
     
@@ -81,6 +86,7 @@ async def get_user_token(bot: Client, message: types.Message):
 
 @validator.command("get_all_tokens", only_owners=True)
 async def get_all_users_tokens(bot: Client, message: types.Message):
+    """Docstring for command"""
     if not hasattr(bot.db.<DEV>, "TOKENS"):
         bot.db.<DEV>.new_db("TOKENS")
     
@@ -117,6 +123,7 @@ def get_auth_manager():
 
 @command("setSpotifyToken")
 async def set_spotify_token(bot, message: types.Message):
+    """Docstring for command"""
     token = get_args(message)
     if not token:
         return await message.answer("Пожалуйста введите <b>Spotify-TOKEN</b>.")
@@ -187,6 +194,7 @@ async def get_spotify_now_track(bot, result):
     command="spotify",
 )
 async def inline_spotify(bot, query: types.InlineQuery):
+    """Docstring for command"""
     devDB = bot.db.<DEV>
     if not hasattr(devDB, "Spotify"):
         devDB.new_db("Spotify")

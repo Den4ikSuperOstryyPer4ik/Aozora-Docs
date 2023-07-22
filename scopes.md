@@ -13,8 +13,9 @@
 ```python
 # developer: @hikamorumeh
 # description: Модуль для работы с Spotify
-# requirements: pydantic spotipy
+# requirements: pydantic, spotipy
 # version: 1.0.0
+# icon: link_to_icon
 
 from pyrogram import Client, types
 

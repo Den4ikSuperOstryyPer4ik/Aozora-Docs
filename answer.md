@@ -122,6 +122,8 @@ await chosen_inline_result.answer(
     parse_mode=pyrogram.enums.ParseMode.HTML,
 )
 ```
+
+
 ---
 <p align="center">
     <a href='https://github.com/Den4ikSuperOstryyPer4ik/Aozora-Docs/blob/main/README.md'>
